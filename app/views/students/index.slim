@@ -1,0 +1,27 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      h4 Estudantes
+    .panel-body
+      .form-group
+        == flash_message
+        == link_to 'Cadastrar Estudante', new_student_path, class: 'btn btn-default'
+
+      table.table.table-hover
+        tr
+          th ID
+          th Nome
+          th CPF
+          th Status
+          th colspan='2'
+
+        - if @students.present?
+          - @students.each do |student|
+
+            tr
+              th == student.id
+              th == student.name
+              th == student.register_number
+              th == Status.t(student.status)
+              th == link_to 'Editar', edit_student_path(student), class: 'btn btn-link'
+              th == link_to 'Excluir', student, data: { confirm: 'Tem certeza que deseja excluir cadastro do estudante?'}, method: :delete, class: 'btn btn-link'

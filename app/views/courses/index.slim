@@ -1,0 +1,27 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      h4 Cursos
+    .panel-body
+      .form-group
+        == flash_message
+        == link_to 'Cadastrar Curso', new_course_path, class: 'btn btn-default'
+
+      table.table.table-hover
+        tr
+          th ID
+          th Nome
+          th Descrição
+          th Status
+          th colspan='2'
+
+        - if @courses.present?
+          - @courses.each do |course|
+
+            tr
+              th == course.id
+              th == course.name
+              th == course.description
+              th == Status.t(course.status)
+              th == link_to 'Editar', edit_course_path(course), class: 'btn btn-link'
+              th == link_to 'Excluir', course, data: { confirm: 'Tem certeza que deseja excluir o curso?'}, method: :delete, class: 'btn btn-link'

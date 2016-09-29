@@ -1,0 +1,26 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      h4 Matrículas
+    .panel-body
+      .form-group
+        == flash_message
+        == link_to 'Fazer matrícula', new_classroom_path, class: 'btn btn-default'
+
+      table.table.table-hover
+        tr
+          th ID
+          th Curso
+          th Estudante
+          th Matriculado em
+          th
+
+        - if @classrooms.present?
+          - @classrooms.each do |classroom|
+
+            tr
+              th == classroom.id
+              th == classroom.course.name
+              th == classroom.student.name
+              th == classroom.entry_at.to_time.strftime('%d/%m/%Y às %H:%M')
+              th == link_to 'Remover', classroom, data: { confirm: 'Tem certeza que deseja remover o estudante desse curso?'}, method: :delete, class: 'btn btn-link'
